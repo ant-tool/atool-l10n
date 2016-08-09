@@ -4,7 +4,7 @@ import { join } from 'path';
 export default function skipLocal(query) {
   const { source, skip } = {
     source: 'locales',
-    skip: false,
+    skip: true,
     ...query,
   };
 

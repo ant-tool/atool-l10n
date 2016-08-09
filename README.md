@@ -24,10 +24,10 @@ automatical solution for generating localization resource using middlewares
     middlewares: {
       summary: ['summary?sourcePattern=i18n-messages/**/*.json'],
       process: [
-        'fetchLocal?source=locales',
+        'fetchLocal?source=locales,skip',
         'metaToResult?from=defaultMessage,to=zh',
-        'youdao',
-        'reduce?-autoPick,autoReduce[]=local,autoReduce[]=meta'
+        'youdao?apiname=iamatestmanx,apikey=2137553564',
+        'reduce?-autoPick,autoReduce[]=local,autoReduce[]=meta',
       ],
       emit: ['save?dest=locales'],
     },
@@ -91,7 +91,7 @@ You can check the detail API via [file](https://github.com/ant-tool/atool-l10n/t
 |parameter|default|description|
 |:-------:|:-----:|:---------:|
 |`source`|`'locales'`|where the local locales messages file is, file name is same as language name, eg: `zh`|
-
+|`skip`|`true`|if add the id into translating skip array when all local locales messages for it is not empty|
 
 - `metaToResult`: take defaultMessage or other key of meta into an option of translation result
 
