@@ -28,9 +28,13 @@ export default async function reduce(query) {
     ...query,
   };
 
-  log.info('reduce', `autoPick ${autoPick} autoReduce ${autoReduce}`);
-
   const todo = this.getTodo();
+  if (!(todo.length)) {
+    log.info('reduce', 'no element need to be processed');
+    return;
+  }
+
+  log.info('reduce', `autoPick ${autoPick} autoReduce ${autoReduce}`);
 
   for (const id of todo) {
     const record = this.getResult(id);

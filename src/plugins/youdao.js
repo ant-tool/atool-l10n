@@ -24,10 +24,17 @@ export default async function youdao(query) {
     apikey: '2137553564',
     ...query,
   };
+
+  const todo = this.getTodo();
+  if (!(todo.length)) {
+    log.info('youdao', 'no element need to be processed');
+    return;
+  }
+
   log.info('youdao', `using apiname: ${keyfrom}, apikey: ${key}`);
   const url = 'http://fanyi.youdao.com/openapi.do';
 
-  for (const id of this.getTodo()) {
+  for (const id of todo) {
     const texts = this.getOptionValues(id, 'zh');
     if (!texts.length) {
       log.warn('youdao', `skip ${id} from zh to en`);

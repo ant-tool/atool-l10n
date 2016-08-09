@@ -10,6 +10,14 @@ export default function skipLocal(query) {
 
   const langs = Object.keys(this.LANGS)
     .filter(lang => this.existsResolve(join(this.context.cwd, source, lang)));
+
+  if (!(langs.length)) {
+    log.info('fetchLocal', 'no local files need to be processed');
+    return;
+  }
+
+  log.info('fetchLocal', `from ${source}, language: ${langs}, skip ${skip}`);
+
   const localCollect = langs
     .reduce((collect, lang) => {
       const content = require(join(this.context.cwd, source, lang));
@@ -36,7 +44,7 @@ export default function skipLocal(query) {
           ...collect,
           [lang]: this.getLocal(lang)[id],
         }), {}));
-        log.warn('skip', id);
+        log.warn('add to skip', id);
       }
     });
   }
