@@ -14,10 +14,10 @@ export default function createContext(context, others) {
       result: {},
     },
     getMeta(id) {
-      return id ? this._store.meta[id] : this._store.meta;
+      return id ? this._store.meta[id] || {} : this._store.meta;
     },
     getLocal(lang) {
-      return lang ? this._store.local[lang] : this._store.local;
+      return lang ? this._store.local[lang] || {} : this._store.local;
     },
     getList() {
       return this._store.list;

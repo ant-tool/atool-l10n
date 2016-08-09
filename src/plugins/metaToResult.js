@@ -15,7 +15,7 @@ export default function metaToResult(query) {
   log.info('metaToResult', `from meta.${from} to result.${to}`);
 
   todo.forEach(id => {
-    if (this.getMeta(id)[from] !== this.getLocal(to)[id]) {
+    if (this.getLocal(to)[id] && this.getMeta(id)[from] !== this.getLocal(to)[id]) {
       log.warn(`multiple ${to}@${id}`,
         `${this.getMeta(id)[from]}(meta) !== ${this.getLocal(to)[id]}(local)`);
     }
