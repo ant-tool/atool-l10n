@@ -8,6 +8,8 @@ automatical solution for generating localization resource using middlewares
 
 [Demo in React](https://github.com/ant-design/intl-example)
 
+![](https://zos.alipayobjects.com/rmsportal/JoGKhgfuFXaJNzK.gif)
+
 ## Usage
 
 

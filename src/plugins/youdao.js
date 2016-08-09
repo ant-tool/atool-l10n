@@ -49,7 +49,7 @@ export default async function youdao(query) {
           q,
         });
         result.forEach(each => {
-          log.info('youdao translated', `${q} -> ${each}`);
+          log.info('youdao: zh -> en', `${q} -> ${each}`);
           this.setOption(id, 'en', {
             [`youdao, ${q}`]: each,
           });
