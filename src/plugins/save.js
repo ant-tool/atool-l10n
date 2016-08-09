@@ -1,4 +1,4 @@
-import { writeFileSync } from 'fs';
+import { writeFileSync, existsSync, statSync, mkdirSync } from 'fs';
 import log from 'spm-log';
 import { join } from 'path';
 
@@ -23,19 +23,26 @@ export default function save(query) {
 
   const saveResult = {};
 
+  const dir = join(this.context.cwd, dest);
+
   results.forEach(result => {
     const langs = Object.keys(result).filter(lang => lang !== 'id');
     langs.forEach(lang => {
       saveResult[lang] = saveResult[lang] || {
         lang,
         content: {},
-        file: `${join(this.context.cwd, dest, lang)}.json`,
+        file: `${join(dir, lang)}.json`,
       };
 
       saveResult[lang].content[result.id] = result[lang];
     });
   });
 
+
+  if (!existsSync(dir)
+    || !statSync(dir).isDirectory()) {
+    mkdirSync(dir);
+  }
 
   Object.keys(saveResult).forEach(item => {
     writeFileSync(
