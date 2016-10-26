@@ -3,39 +3,41 @@ import resolve from './resolve';
 import { parseQuery } from 'loader-utils';
 import { isAbsolute, isRelative, isProvided } from './util';
 
-export function resolvePlugin(_pluginName, resolveDir, cwd = process.cwd()) {
+export function resolvePlugin(config, resolveDir, cwd = process.cwd()) {
   let plugin;
-  let name = false;
-  let query = {};
+  let name;
+  let query;
 
-  if (typeof _pluginName === 'string') {
-    const [pluginName, _query] = _pluginName.split('?');
-    name = pluginName;
-    if (_query) {
-      query = parseQuery(`?${_query}`);
+  if (typeof config === 'string') {
+    [name, query] = config.split('?');
+    query = query ? parseQuery(`?${query}`) : {};
+  } else if (Array.isArray(config)) {
+    name = config[0];
+    query = config[1] || {};
+  }
+
+  if (isRelative(name)) {
+    plugin = require(join(cwd, name));
+  } else if (isAbsolute(name)) {
+    plugin = require(name);
+  } else if (isProvided(name)) {
+    plugin = require(join(__dirname, 'plugins', name));
+  } else {
+    const pluginPath = resolve(name, resolveDir);
+    if (!pluginPath) {
+      throw new Error(`[Error] ${name} not found in ${resolveDir}`);
     }
-    if (isRelative(pluginName)) {
-      plugin = require(join(cwd, pluginName));
-    } else if (isAbsolute(pluginName)) {
-      plugin = require(pluginName);
-    } else if (isProvided(pluginName)) {
-      plugin = require(join(__dirname, 'plugins', pluginName));
-    } else {
-      const pluginPath = resolve(pluginName, resolveDir);
-      if (!pluginPath) {
-        throw new Error(`[Error] ${pluginName} not found in ${resolveDir}`);
-      }
-      plugin = require(pluginPath);
-    }
+
+    plugin = require(pluginPath);
   }
 
   return {
-    query,
     plugin,
     name,
+    query,
   };
 }
 
-export function resolvePlugins(pluginNames, resolveDir, cwd) {
-  return pluginNames.map(pluginName => resolvePlugin(pluginName, resolveDir, cwd));
+export function resolvePlugins(plugins, resolveDir, cwd) {
+  return plugins.map(plugin => resolvePlugin(plugin, resolveDir, cwd));
 }
