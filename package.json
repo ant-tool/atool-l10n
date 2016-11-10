@@ -27,6 +27,7 @@
     "dev": "./node_modules/.bin/babel src --out-dir lib --watch --ignore __tests__ -s",
     "lint": "eslint --ext .js src",
     "pub": "npm run build && npm publish",
+    "test": "npm run lint",
     "doc": "atool-doc"
   },
   "dependencies": {
