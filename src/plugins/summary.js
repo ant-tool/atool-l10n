@@ -3,7 +3,9 @@ import { join } from 'path';
 import log from 'spm-log';
 
 function parseMeta(cwd, sourcePattern) {
-  return sync(join(cwd, sourcePattern))
+  const patternArray = Array.isArray(sourcePattern) ? sourcePattern : [sourcePattern];
+  return patternArray.map(pattern => sync(join(cwd, pattern)))
+    .reduce((a, b) => a.concat(b))
     .map(file => require(file))
     .reduce((a, b) => a.concat(b));
 }
@@ -14,10 +16,9 @@ export default function summary(query) {
     ...query,
   };
   log.info('summary', sourcePattern);
-  const metaArray = Array.isArray(sourcePattern) ?
-    sourcePattern.map(pattern => parseMeta(this.context.cwd, pattern))
-      .reduce((a, b) => a.concat(b))
-    : parseMeta(this.context.cwd, sourcePattern);
+
+  const metaArray = parseMeta(this.context.cwd, sourcePattern);
+
   const meta = this.arrayToObject(metaArray, 'id');
   this._store.meta = meta;
   this._store.list = Object.keys(meta);

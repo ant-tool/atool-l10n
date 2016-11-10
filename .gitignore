@@ -5,4 +5,4 @@ __site
 .vscode
 .DS_Store
 /npm-debug.log
-
+.editorconfig
