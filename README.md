@@ -86,7 +86,7 @@ You can check the detail API via [file](https://github.com/ant-tool/atool-l10n/t
 
 |parameter|default|description|
 |:-------:|:-----:|:---------:|
-|`sourcePattern`|`'i18n-messages/**/*.json'`|where the messages json files is, specified in `babel-plugin-react-intl`|
+|`sourcePattern`|`'i18n-messages/**/*.json'`|where the messages json files is, specified in `babel-plugin-react-intl`, array supported|
 
 - `fetchLocal`: add local locales messages as an option of translation result
 
