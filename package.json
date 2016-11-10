@@ -1,6 +1,6 @@
 {
   "name": "atool-l10n",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "automatical solution for generating localization resource using middlewares",
   "author": "jaredleechn <jaredleechn@gmail.com>",
   "homepage": "https://github.com/ant-tool/atool-l10n",

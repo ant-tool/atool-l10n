@@ -1,3 +1,7 @@
+## 0.2.0
+
+- feat:summary support `sourcePattern` array supported
+
 ## 0.1.1
 
 - [break:fetchLocal] change params `skip` to true by default
