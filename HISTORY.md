@@ -1,3 +1,7 @@
+## 0.2.1
+
+- feat:summary warn if not find locale files
+
 ## 0.2.0
 
 - feat:summary support `sourcePattern` array supported
