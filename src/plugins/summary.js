@@ -25,7 +25,7 @@ export default function summary(query) {
   const metaArray = parseMeta(this.context.cwd, sourcePattern);
 
   if (metaArray.length === 0) {
-    log.warn('summary', 'no local files find, run webpack with babel-plugin-intl first');
+    log.warn('summary', 'no local files find, run webpack with babel-plugin-react-intl first');
   }
 
   const meta = this.arrayToObject(metaArray, 'id');

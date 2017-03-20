@@ -1,3 +1,7 @@
+## 0.2.2
+
+- fix: typo
+
 ## 0.2.1
 
 - feat:summary warn if not find locale files
