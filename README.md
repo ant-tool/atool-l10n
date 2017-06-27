@@ -111,6 +111,10 @@ You can check the detail API via [file](https://github.com/ant-tool/atool-l10n/t
 
 you can easily apply the apiname and apikey from [youdao](http://fanyi.youdao.com/openapi?path=data-mode)
 
+- `google`: fetch translate result from zh to en from google translate
+
+use [google-translate-api](https://github.com/matheuss/google-translate-api)
+
 - `gugu`: automatic contextualized translate for multi languages of each id from gugu, only available in alibaba-network
 
 |parameter|default|description|
