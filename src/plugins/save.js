@@ -1,6 +1,7 @@
-import { writeFileSync, existsSync, statSync, mkdirSync } from 'fs';
+import { writeFileSync } from 'fs';
 import log from 'spm-log';
 import { join } from 'path';
+import ensureDir from 'ensure-dir';
 
 function sortKey(obj) {
   return Object.keys(obj)
@@ -38,16 +39,12 @@ export default function save(query) {
     });
   });
 
-
-  if (!existsSync(dir)
-    || !statSync(dir).isDirectory()) {
-    mkdirSync(dir);
-  }
-
-  Object.keys(saveResult).forEach(item => {
-    writeFileSync(
-      saveResult[item].file,
-      JSON.stringify(sortKey(saveResult[item].content), null, 2));
+  ensureDir(dir).then(() => {
+    Object.keys(saveResult).forEach(item => {
+      writeFileSync(
+        saveResult[item].file,
+        JSON.stringify(sortKey(saveResult[item].content), null, 2)
+      );
+    });
   });
-  return true;
 }
