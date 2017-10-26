@@ -1,3 +1,8 @@
+## 0.3.0
+
+- fix: make dir fail if parent path not exist, [#9](https://github.com/ant-tool/atool-l10n/pull/9)
+- feat: add google plugin, [#8](https://github.com/ant-tool/atool-l10n/pull/8)
+
 ## 0.2.2
 
 - fix: typo
