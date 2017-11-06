@@ -21,15 +21,15 @@ export default async function google(query) {
   log.info('google translate starts');
 
   for (const id of todo) {
-    const texts = this.getOptionValues(id, 'zh');
+    const texts = this.getOptionValues(id, from);
     if (!texts.length) {
-      log.warn('google', `skip ${id} from zh to en`);
+      log.warn('google', `skip ${id} from ${from} to ${to}`);
     } else {
       for (const q of texts) {
         const result = await words(q, { from, to });
-        log.info('google: zh -> en', `${q} -> ${result}`);
+        log.info(`google: ${from} -> ${to}`, `${q} -> ${result}`);
 
-        this.setOption(id, 'en', {
+        this.setOption(id, to, {
           [`google, ${q}`]: result,
         });
       }

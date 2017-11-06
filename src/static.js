@@ -1,7 +1,7 @@
 exports.LANGS = {
   en: { full: 'english', name: '英语' },
-  zh: { full: 'Simplified Chinese', name: '简体中文' },
-  zt: { full: 'Traditional Chinese', name: '繁体中文' },
+  zh: { full: 'Simplified Chinese', name: '简体中文', alias: ['zh-cn'] },
+  zt: { full: 'Traditional Chinese', name: '繁体中文', alias: ['zh-tw'] },
   es: { full: 'spanish', name: '西班牙语' },
   pt: { full: 'portuguese', name: '葡萄牙语' },
   fr: { full: 'french', name: '法语' },

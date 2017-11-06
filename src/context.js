@@ -30,6 +30,14 @@ export default function createContext(context, others) {
         this._store.skip.push(id);
       }
     },
+    resolveLang(lang) {
+      if (LANGS[lang]) {
+        return lang;
+      }
+      const key = Object.keys(LANGS)
+        .find(langShort => (LANGS[langShort].alias || []).some(langLong => langLong === lang));
+      return key || lang;
+    },
     getTodo() {
       return this._store.list.filter(id => this._store.skip.indexOf(id) === -1);
     },
@@ -52,9 +60,11 @@ export default function createContext(context, others) {
     removeOption(id, lang, key) {
       delete this._store.result[id][lang][key];
     },
-    setOption(id, lang, option) {
+    setOption(id, langIncome, option) {
       this._store.result[id] = this._store.result[id] || {};
       const record = this._store.result[id];
+
+      const lang = this.resolveLang(langIncome);
 
       switch (this.typeOf(record[lang])) {
         case 'object':
@@ -81,7 +91,8 @@ export default function createContext(context, others) {
           log.error('setOptionForLang', 'unSupported type');
       }
     },
-    getOptionValues(id, lang) {
+    getOptionValues(id, langIncome) {
+      const lang = this.resolveLang(langIncome);
       const record = this._store.result[id][lang];
       switch (this.typeOf(record)) {
         case 'object':
