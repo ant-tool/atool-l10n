@@ -10,10 +10,9 @@ async function words(q, params) {
 }
 
 export default async function google(query) {
-  const { from = 'zh-cn', to = 'en' } = query;
-
+  const { from = 'zh', to = 'en' } = query;
   const todo = this.getTodo();
-  if (!(todo.length)) {
+  if (!todo.length) {
     log.info('google', 'no element need to be processed');
     return;
   }
@@ -21,17 +20,20 @@ export default async function google(query) {
   log.info('google translate starts');
 
   for (const id of todo) {
-    const texts = this.getOptionValues(id, 'zh');
+    const texts = this.getOptionValues(id, from);
     if (!texts.length) {
-      log.warn('google', `skip ${id} from zh to en`);
+      log.warn('google', `skip ${id} from ${to} to ${to}`);
     } else {
       for (const q of texts) {
-        const result = await words(q, { from, to });
-        log.info('google: zh -> en', `${q} -> ${result}`);
-
-        this.setOption(id, 'en', {
-          [`google, ${q}`]: result,
-        });
+        try {
+          const result = await words(q, { from, to });
+          log.info(`google: ${from} -> ${to}`, `${q} -> ${result}`);
+          this.setOption(id, to, {
+            [`google, ${q}`]: result,
+          });
+        } catch (e) {
+          throw e;
+        }
       }
     }
   }
