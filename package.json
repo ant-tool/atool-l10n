@@ -34,7 +34,7 @@
     "commander": "~2.9.0",
     "ensure-dir": "^0.1.0",
     "glob": "~7.0.3",
-    "google-translate-api": "git+https://github.com/snkrsnkampa/google-translate-api.git",
+    "google-translate-api": "2.3.0",
     "inquirer": "~1.0.3",
     "is-ali-env": "^0.1.2",
     "loader-utils": "~0.2.15",
