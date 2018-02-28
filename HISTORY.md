@@ -1,3 +1,7 @@
+## 0.3.1
+
+- fix: google plugin dependencies, use npm instead of github
+
 ## 0.3.0
 
 - fix: make dir fail if parent path not exist, [#9](https://github.com/ant-tool/atool-l10n/pull/9)
