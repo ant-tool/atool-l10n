@@ -117,6 +117,7 @@ you can easily apply the apiname and apikey from [youdao](http://fanyi.youdao.co
 |:-------:|:-----:|:---------:|
 |`from`|`'zh-cn'`|string, what languages you want to translate from|
 |`to`|`'en'`|string, what languages you want to translate to|
+|`tld`|`'cn'`|string, which TLD of Google Translate you want to use, form: `translate.google.${tld}`|
 
 use [google-translate-api](https://github.com/matheuss/google-translate-api)
 
