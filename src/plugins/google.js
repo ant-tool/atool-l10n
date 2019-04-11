@@ -1,5 +1,5 @@
 import log from 'spm-log';
-import translate from 'google-translate-api';
+import translate from '@vitalets/google-translate-api';
 
 // https://github.com/matheuss/google-translate-response-spec
 
@@ -10,7 +10,7 @@ async function words(q, params) {
 }
 
 export default async function google(query) {
-  const { from = 'zh-cn', to = 'en' } = query;
+  const { from = 'zh-cn', to = 'en', tld = 'cn' } = query;
 
   const todo = this.getTodo();
   if (!(todo.length)) {
@@ -26,7 +26,7 @@ export default async function google(query) {
       log.warn('google', `skip ${id} from zh to en`);
     } else {
       for (const q of texts) {
-        const result = await words(q, { from, to });
+        const result = await words(q, { from, to, tld });
         log.info('google: zh -> en', `${q} -> ${result}`);
 
         this.setOption(id, 'en', {
