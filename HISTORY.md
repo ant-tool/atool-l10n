@@ -1,3 +1,7 @@
+## 0.4.0
+
+- fix: replace google google-translate-api with @vitalets/google-translate-api
+
 ## 0.3.1
 
 - fix: google plugin dependencies, use npm instead of github
