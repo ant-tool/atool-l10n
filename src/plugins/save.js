@@ -5,7 +5,7 @@ import ensureDir from 'ensure-dir';
 
 function sortKey(obj) {
   return Object.keys(obj)
-    .sort((a, b) => a.toString().toLowerCase() > b.toString().toLowerCase())
+    .sort()
     .reduce((collect, current) => ({
       ...collect,
       [current]: obj[current],
@@ -29,12 +29,7 @@ export default function save(query) {
   results.forEach(result => {
     const langs = Object.keys(result).filter(lang => lang !== 'id');
     langs.forEach(lang => {
-      saveResult[lang] = saveResult[lang] || {
-        lang,
-        content: {},
-        file: `${join(dir, lang)}.json`,
-      };
-
+      saveResult[lang] = saveResult[lang] || { lang, content: {}, file: `${join(dir, lang)}.json` };
       saveResult[lang].content[result.id] = result[lang];
     });
   });

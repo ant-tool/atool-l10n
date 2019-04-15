@@ -44,7 +44,8 @@ export default function skipLocal(query) {
           ...collect,
           [lang]: this.getLocal(lang)[id],
         }), {}));
-        log.warn('add to skip', id);
+
+        log.info('add to skip', id);
       }
     });
   }
